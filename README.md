@@ -1,13 +1,27 @@
 # Italki teachers
 
+Scrape all italki teachers for Chinese and start a datasette instance for 
+searching.
 
-## For creating the database
+## Dependencies
+
+```bash
+$ pip install -r requirements.txt
+```
+
+Make sure you have `jq` installed:
+
+```bash
+$ brew install jq
+```
+
+## Create the database
 
 ```bash
 $ cat pages/* | jq '.data[] | (.teacher_info + .user_info)' | jq -s | sqlite-utils insert db.sqlite teachers -
 ```
 
-## For enabling full text search
+## Enable full text search
 ```bash
 $ sqlite-utils enable-fts db.sqlite teachers intro nickname
 ```
